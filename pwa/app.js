@@ -1,5 +1,9 @@
 const DEBUG_PREFIX = '[SmartWrapper]';
 const RecognitionClass = window.SpeechRecognition || window.webkitSpeechRecognition;
+const WRAPPER_API_BASE =
+  window.localStorage.getItem('smart_wrapper_api_base') ||
+  window.SMART_WRAPPER_API_BASE ||
+  'https://wrapper-channel-1003987130329.us-central1.run.app';
 let clientSessionId = window.localStorage.getItem('smart_wrapper_session_id') || `smart-wrapper-${crypto.randomUUID()}`;
 
 window.localStorage.setItem('smart_wrapper_session_id', clientSessionId);
@@ -323,7 +327,7 @@ async function ensureMicrophoneAccess() {
 
 async function sendVoiceCommand(prompt) {
   debugLog('chat request', { prompt, clientSessionId });
-  const response = await fetch('/api/chat', {
+  const response = await fetch(`${WRAPPER_API_BASE}/api/chat`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -348,7 +352,7 @@ async function sendVoiceCommand(prompt) {
 }
 
 async function fetchSessionResult() {
-  const response = await fetch(`/api/session-result?sessionId=${encodeURIComponent(clientSessionId)}`);
+  const response = await fetch(`${WRAPPER_API_BASE}/api/session-result?sessionId=${encodeURIComponent(clientSessionId)}`);
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
@@ -359,7 +363,7 @@ async function fetchSessionResult() {
 }
 
 async function fetchPurchaseResult() {
-  const response = await fetch(`/api/purchase-result?sessionId=${encodeURIComponent(clientSessionId)}`);
+  const response = await fetch(`${WRAPPER_API_BASE}/api/purchase-result?sessionId=${encodeURIComponent(clientSessionId)}`);
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
@@ -402,7 +406,7 @@ async function requestPurchaseFromBridge({ cedula, selection }) {
   };
 
   debugLog('request purchase proxy', payload);
-  const response = await fetch('/api/request-purchase', {
+  const response = await fetch(`${WRAPPER_API_BASE}/api/request-purchase`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
