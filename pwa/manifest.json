@@ -1,0 +1,26 @@
+{
+  "name": "Smart Wrapper Demo",
+  "short_name": "Wrapper Demo",
+  "description": "Demo PWA instalable desde navegador para simular una experiencia tipo wrapper en Android.",
+  "start_url": "./index.html?shell=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#0b57d0",
+  "orientation": "portrait",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

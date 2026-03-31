@@ -1,0 +1,283 @@
+:root {
+  --bg-top: #06111f;
+  --bg-bottom: #030812;
+  --surface: rgba(10, 26, 48, 0.8);
+  --surface-strong: rgba(13, 35, 63, 0.96);
+  --line: rgba(135, 178, 255, 0.16);
+  --text: #f5f8ff;
+  --muted: #9db0cf;
+  --primary: #0b57d0;
+  --primary-strong: #4da3ff;
+  --primary-deep: #6d5efc;
+  --assistant: rgba(72, 212, 161, 0.13);
+  --user: rgba(77, 163, 255, 0.14);
+  --shadow: 0 28px 90px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(77, 163, 255, 0.22), transparent 28%),
+    linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+}
+
+.voice-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.voice-card {
+  width: min(100%, 760px);
+  padding: 40px 28px 28px;
+  border-radius: 32px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+h1 {
+  margin: 12px 0 0;
+  font-size: clamp(2.5rem, 7vw, 4.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.status-text {
+  margin: 14px auto 0;
+  max-width: 520px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.speak-button-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 24px auto 0;
+  display: grid;
+  place-items: center;
+}
+
+.speak-button-wrap::before,
+.speak-button-wrap::after,
+.speak-button-wrap .wave-bars {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.speak-button-wrap::before {
+  border: 2px solid rgba(77, 163, 255, 0.34);
+  transform: scale(0.88);
+}
+
+.speak-button-wrap::after {
+  border: 2px solid rgba(109, 94, 252, 0.26);
+  transform: scale(0.95);
+}
+
+.speak-button-wrap .wave-bars {
+  inset: 2px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent 8%,
+      rgba(77, 163, 255, 0.0) 8%,
+      rgba(77, 163, 255, 0.0) 10%,
+      rgba(77, 163, 255, 0.7) 10%,
+      rgba(77, 163, 255, 0.1) 14%,
+      transparent 14%,
+      transparent 20%,
+      rgba(109, 94, 252, 0.0) 20%,
+      rgba(109, 94, 252, 0.0) 22%,
+      rgba(109, 94, 252, 0.65) 22%,
+      rgba(109, 94, 252, 0.12) 26%,
+      transparent 26%,
+      transparent 34%,
+      rgba(77, 163, 255, 0.0) 34%,
+      rgba(77, 163, 255, 0.0) 36%,
+      rgba(77, 163, 255, 0.8) 36%,
+      rgba(77, 163, 255, 0.12) 40%,
+      transparent 40%,
+      transparent 50%,
+      rgba(109, 94, 252, 0.0) 50%,
+      rgba(109, 94, 252, 0.0) 52%,
+      rgba(109, 94, 252, 0.72) 52%,
+      rgba(109, 94, 252, 0.15) 56%,
+      transparent 56%,
+      transparent 64%,
+      rgba(77, 163, 255, 0.0) 64%,
+      rgba(77, 163, 255, 0.0) 66%,
+      rgba(77, 163, 255, 0.72) 66%,
+      rgba(77, 163, 255, 0.12) 70%,
+      transparent 70%,
+      transparent 82%,
+      rgba(109, 94, 252, 0.0) 82%,
+      rgba(109, 94, 252, 0.0) 84%,
+      rgba(109, 94, 252, 0.78) 84%,
+      rgba(109, 94, 252, 0.12) 88%,
+      transparent 88%,
+      transparent 100%
+    );
+  filter: blur(0.2px);
+  transform: scale(0.92);
+  mix-blend-mode: screen;
+}
+
+.speak-button-wrap.speaking::before {
+  animation: wavePulse 1.35s ease-out infinite;
+}
+
+.speak-button-wrap.speaking::after {
+  animation: wavePulse 1.35s ease-out infinite 0.4s;
+}
+
+.speak-button-wrap.speaking .wave-bars {
+  opacity: 1;
+  animation: equalizerPulse 0.9s ease-in-out infinite;
+}
+
+.speak-button {
+  appearance: none;
+  width: 180px;
+  height: 180px;
+  border: none;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25), transparent 24%),
+    radial-gradient(circle at 30% 30%, var(--primary-strong), var(--primary) 52%, var(--primary-deep));
+  color: white;
+  font: inherit;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow:
+    0 20px 50px rgba(11, 87, 208, 0.38),
+    inset 0 2px 18px rgba(255, 255, 255, 0.15);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.speak-button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.speak-button:disabled {
+  cursor: default;
+  opacity: 0.82;
+}
+
+@keyframes wavePulse {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.88);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.22);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.28);
+  }
+}
+
+@keyframes equalizerPulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.92) rotate(0deg);
+    filter: blur(0.3px) saturate(1.1);
+  }
+  35% {
+    opacity: 0.92;
+    transform: scale(0.98) rotate(-1deg);
+    filter: blur(0px) saturate(1.35);
+  }
+  70% {
+    opacity: 0.6;
+    transform: scale(1.03) rotate(1deg);
+    filter: blur(0.2px) saturate(1.2);
+  }
+  100% {
+    opacity: 0.35;
+    transform: scale(0.92) rotate(0deg);
+    filter: blur(0.3px) saturate(1.1);
+  }
+}
+
+.conversation-panel {
+  margin-top: 32px;
+  display: grid;
+  gap: 14px;
+  text-align: left;
+}
+
+.bubble {
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+}
+
+.bubble-label {
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.bubble p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.user-bubble {
+  background: var(--user);
+}
+
+.assistant-bubble {
+  background: var(--assistant);
+}
+
+@media (max-width: 640px) {
+  .speak-button-wrap {
+    width: 186px;
+    height: 186px;
+  }
+
+  .voice-card {
+    padding: 28px 18px 20px;
+    border-radius: 24px;
+  }
+
+  .speak-button {
+    width: 150px;
+    height: 150px;
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b57d0">
+  <meta name="description" content="Demo PWA conversacional con voz y Gemini, instalable desde el navegador.">
+  <title>Smart Wrapper Demo</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="voice-shell">
+    <section class="voice-card">
+      <p class="eyebrow">Smart Wrapper Demo</p>
+      <h1>Habla y te respondo</h1>
+      <p id="status-text" class="status-text">Listo para escuchar.</p>
+
+      <div class="speak-button-wrap" id="speak-button-wrap">
+        <span class="wave-bars" aria-hidden="true"></span>
+        <button id="speak-button" class="speak-button" type="button">Hablar</button>
+      </div>
+
+      <section class="conversation-panel" aria-live="polite">
+        <div class="bubble user-bubble">
+          <span class="bubble-label">Tu comando</span>
+          <p id="transcript-text">Toca "Hablar" y di lo que necesitas.</p>
+        </div>
+
+        <div class="bubble assistant-bubble">
+          <span class="bubble-label">Respuesta</span>
+          <p id="response-text">Aqui aparecera la respuesta del asistente.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
