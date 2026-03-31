@@ -73,6 +73,55 @@ Luego abre:
 
 - `http://localhost:8092`
 
+## Repos separados
+
+Este proyecto ya vive en un repo distinto de la BBVA demo.
+
+- Wrapper: `https://github.com/acardonag/wrapper`
+- BBVA demo: `https://github.com/acardonag/blue-agents-demo`
+
+## Comandos para Cloud Shell
+
+Si vas a trabajar desde Cloud Shell, baja cada proyecto por separado:
+
+```bash
+git clone https://github.com/acardonag/wrapper.git
+git clone https://github.com/acardonag/blue-agents-demo.git
+```
+
+Para levantar el wrapper localmente:
+
+```bash
+cd wrapper
+npm install
+PORT=8095 AGENT_PROVIDER=ces-session-bridge CES_SESSION_BRIDGE_BASE=https://ces-session-bridge-1003987130329.us-central1.run.app AGENT_ALLOW_INSECURE_TLS=true npm start
+```
+
+Para desplegar la BBVA demo en Firebase Hosting:
+
+```bash
+cd blue-agents-demo
+npx --yes firebase-tools deploy --only hosting --project team-blue-agents
+```
+
+Para desplegar los bridges de GCP desde el directorio local correspondiente:
+
+```bash
+gcloud run deploy ces-session-bridge \
+  --source /Users/C810865/Documents/W/CODEX_BLUE_AGENTS/gcp/ces-session-bridge \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --project team-blue-agents
+```
+
+```bash
+gcloud run deploy voice-commerce-bridge \
+  --source /Users/C810865/Documents/W/CODEX_BLUE_AGENTS/gcp/voice-commerce-bridge \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --project team-blue-agents
+```
+
 ## Ejemplos de configuracion
 
 Fallback local:
