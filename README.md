@@ -73,6 +73,16 @@ Luego abre:
 
 - `http://localhost:8092`
 
+## Firebase Hosting
+
+Este wrapper puede desplegarse en el sitio independiente `bbva-compras.firebaseapp.com`.
+
+```bash
+npx --yes firebase-tools deploy --only hosting:bbva-compras --project team-blue-agents
+```
+
+La configuracion de hosting usa `pwa/` como raiz publica de la PWA.
+
 ## Repos separados
 
 Este proyecto ya vive en un repo distinto de la BBVA demo.
