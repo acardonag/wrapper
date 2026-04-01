@@ -35,6 +35,84 @@ body {
   padding: 24px;
 }
 
+.install-banner {
+  position: fixed;
+  z-index: 20;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100% - 24px), 560px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(77, 163, 255, 0.25);
+  background: rgba(7, 17, 31, 0.92);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.install-banner__copy {
+  display: grid;
+  gap: 2px;
+}
+
+.install-banner__copy strong {
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+}
+
+.install-banner__copy span {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.install-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.install-banner__button {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--primary-strong), var(--primary));
+  color: #fff;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.install-banner__dismiss {
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(157, 176, 207, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  .install-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .install-banner__actions {
+    align-self: flex-end;
+  }
+}
+
 .voice-card {
   width: min(100%, 760px);
   padding: 40px 28px 28px;

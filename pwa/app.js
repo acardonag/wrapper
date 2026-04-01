@@ -39,6 +39,11 @@ const speakButtonWrap = document.getElementById('speak-button-wrap');
 const statusText = document.getElementById('status-text');
 const transcriptText = document.getElementById('transcript-text');
 const responseText = document.getElementById('response-text');
+const installBanner = document.getElementById('install-banner');
+const installButton = document.getElementById('install-button');
+const installDismiss = document.getElementById('install-dismiss');
+
+let deferredInstallPrompt = null;
 
 function debugLog(step, payload) {
   if (payload === undefined) {
@@ -71,6 +76,48 @@ function setTranscript(text) {
 function setResponse(text) {
   responseText.textContent = text || 'Aqui aparecera la respuesta del asistente.';
 }
+
+function showInstallBanner() {
+  if (installBanner) {
+    installBanner.hidden = false;
+  }
+}
+
+function hideInstallBanner() {
+  if (installBanner) {
+    installBanner.hidden = true;
+  }
+}
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  showInstallBanner();
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  hideInstallBanner();
+  debugLog('app installed');
+});
+
+installButton?.addEventListener('click', async () => {
+  if (!deferredInstallPrompt) {
+    debugLog('install prompt missing');
+    return;
+  }
+
+  deferredInstallPrompt.prompt();
+  const choice = await deferredInstallPrompt.userChoice.catch(() => ({ outcome: 'dismissed' }));
+  debugLog('install prompt choice', choice);
+  deferredInstallPrompt = null;
+  hideInstallBanner();
+});
+
+installDismiss?.addEventListener('click', () => {
+  deferredInstallPrompt = null;
+  hideInstallBanner();
+});
 
 function createClientSessionId() {
   return `smart-wrapper-${crypto.randomUUID()}`;
